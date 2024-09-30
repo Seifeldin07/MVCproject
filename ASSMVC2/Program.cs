@@ -1,4 +1,8 @@
 using CompanyDate.Context;
+using CompanyRepository.Interfaces;
+using CompanyRepository.Repositories;
+using CompanyService.Interfaces;
+using CompanyService.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASSMVC2
@@ -16,7 +20,9 @@ namespace ASSMVC2
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-
+             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository >(); 
+             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+             
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
