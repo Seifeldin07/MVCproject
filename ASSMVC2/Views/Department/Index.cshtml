@@ -31,18 +31,18 @@
                 <td>@department.Name</td>
                 <td>@department.CreateAt</td>
                   <td>
-                        <a asp-controller="Details" asp-action="departrmet.Id" class="btn btn-warning">
+                        <a asp-controller="Details" asp-action="@department.Id" class="btn btn-warning">
                             <i class="fas fa-eye"></i>Details
                         </a>
                   </td>
                   <td>
-                        <a asp-controller="Update" asp-action="departrmet.Id" class="btn btn-warning">
+                        <a asp-controller="Update" asp-action="@department.Id" class="btn btn-success">
                             <i class="fas fa-edit"></i>Update
 
                         </a>
                   </td>
                   <td>
-                        <a asp-controller="Delete" asp-action="departrmet.Id" class="btn btn-warning">
+                        <a asp-controller="Delete" asp-action="@department.Id" class="btn btn-danger">
                             <i class="fas fa-trash"></i>Delete
                         </a>
                         

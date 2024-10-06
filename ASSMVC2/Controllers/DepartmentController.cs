@@ -17,8 +17,8 @@ namespace ASSMVC2.Controllers
             var departments = _departmentService.GetAll();
             return View(departments);
         }
-        [HttpPost]
-        public IActionResult create()
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
@@ -35,7 +35,7 @@ namespace ASSMVC2.Controllers
                     return RedirectToAction("Index");
                 }
                 ModelState.AddModelError("DepartmentError", "validationError");
-                return View();
+                return View(department);
 
 
             }
@@ -43,13 +43,51 @@ namespace ASSMVC2.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("DepartmentError", ex.Message);
-                return View();
+                return View(department);
 
             }
 
+        }
 
+        public IActionResult Details(int? id, string viewName = "Details")
+        {
+            var department = _departmentService.GetById(id);
+
+            if (department is null)
+                return RedirectToAction("NotFoundPage", null, "Home");
+
+            return View(viewName,department);
+        }
+        [HttpGet]
+        public IActionResult Update(int? id)
+        {
+            return Details(id, "Update");
+        }
+        [HttpPost]
+        public IActionResult Update(int? id , Department department)
+        {
+            if(department.Id != id.Value)
+                return RedirectToAction("NotFoundPage", null, "Home");
+
+            _departmentService.Update(department);
+
+            return View(department); 
 
         }
+
+       
+        public IActionResult Delete(int id) 
+        {
+            var department = _departmentService.GetById(id);
+
+            if (department is null)
+                return RedirectToAction("NotFoundPage", null, "Home");
+
+            _departmentService.Delete(department);
+            return RedirectToAction(nameof(Index));
+
+        }
+
 
     }
 }

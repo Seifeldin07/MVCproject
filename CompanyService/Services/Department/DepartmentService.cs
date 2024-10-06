@@ -21,7 +21,7 @@ namespace CompanyService.Services
 
         public void Delete(Department department)
         {
-            throw new NotImplementedException();
+            _departmentRepository.Delete(department);
         }
 
         public IEnumerable<Department> GetAll()
@@ -30,14 +30,37 @@ namespace CompanyService.Services
             return departments;
         }
 
-        public Department GetById(int id)
+        public Department GetById(int? id)
         {
-            throw new NotImplementedException();
+            if (id is null)
+                return null;
+            var department = _departmentRepository.GetById(id.Value);
+
+            if (department is null)
+                return null;
+
+            return department;
         }
 
         public void Update(Department department)
         {
-            throw new NotImplementedException();
+          //var dept = GetById(department.Id);
+
+            //if(dept.Name != department.Name)
+            //{
+            //    if (GetAll().Any(x => x.Name == department.Name))
+            //        throw new Exception("DuplicateDepartmentName");
+            //}
+            //dept.Name = department.Name;
+            //dept.Code = department.Code;
+
+            _departmentRepository.Update(department);
+
+
         }
+        
+
+
     }
 }
+
