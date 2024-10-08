@@ -12,6 +12,7 @@ namespace ASSMVC2.Controllers
         {
             _departmentService = departmentService;
         }
+
         public IActionResult Index()
         {
             var departments = _departmentService.GetAll();
